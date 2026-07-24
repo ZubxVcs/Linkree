@@ -4,18 +4,17 @@
     box-sizing: border-box;
 }
 
-
-
 body {
     background-color: #191931;
     color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     padding-top: 4rem;
     gap: 1rem;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 .bg-text-animation {
@@ -23,7 +22,7 @@ body {
     top: 5rem;
     left: 50%;
     transform: translateX(-50%);
-    font-size: clamp(3rem, 15vw, 12rem);
+    font-size: clamp(3rem, 18vw, 12rem);
     text-transform: uppercase;
     font-weight: 900;
     -webkit-text-stroke: 2px #2d2d56;
@@ -33,30 +32,38 @@ body {
     pointer-events: none;
     user-select: none;
     white-space: nowrap;
+    width: 100%;
+    text-align: center;
+    will-change: transform;
 }
  
 .my-foto {
-    width: clamp(8rem, 25vw, 10rem);
+    width: clamp(7rem, 22vw, 10rem);
     border-radius: 50%;
     aspect-ratio: 1/1;
     object-fit: cover;
     object-position: top;
     position: relative;
     z-index: 1;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 h1 {
     position: relative;
     z-index: 1;
     font-size: clamp(1.5rem, 5vw, 2.5rem);
+    margin-top: 1rem;
+    font-weight: 700;
 }
 
 p {
     position: relative;
     z-index: 1;
-    font-size: clamp(0.875rem, 3vw, 1rem);
+    font-size: clamp(0.85rem, 3.5vw, 1rem);
     text-align: center;
-    padding: 0 1rem;
+    padding: 0 1.5rem;
+    line-height: 1.5;
+    max-width: 90%;
 }
 
 a {
@@ -65,34 +72,57 @@ a {
 }
 
 .sosmed i {
-    font-size: 1.5rem;
+    font-size: clamp(1.25rem, 4vw, 1.5rem);
     color: #8787A3;
+    transition: color 0.3s ease;
 }
 
-.sosmed i:hover{
+.sosmed i:hover {
     color: white;
 }
 
-.sosmed a:not(:last-child) {
-    margin-right: 0.5rem;
+.sosmed {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    position: relative;
+    z-index: 1;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.sosmed a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.sosmed a:hover {
+    background-color: rgba(135, 135, 163, 0.1);
 }
 
 ul {
     width: min(90%, 40rem);
     position: relative;
     z-index: 1;
+    margin-bottom: 2rem;
 }
 
 ul li {
     list-style: none;
 }
 
-ul.sosmed li:not(:last-child) {
-    margin-bottom: 1.5rem;
+ul.sosmed {
+    flex-direction: column;
+    gap: 1.5rem;
+    display: flex;
 }
 
-.sosmed {
-    margin-top: 1rem;
+ul.sosmed li {
+    width: 100%;
 }
 
 .link-card {
@@ -100,21 +130,30 @@ ul.sosmed li:not(:last-child) {
     justify-content: space-between;
     align-items: center;
     background-color: #2d2d56;
-    padding: clamp(0.75rem, 4vw, 1rem);
+    padding: clamp(0.75rem, 3vw, 1rem);
     border-radius: 20px;  
-    box-shadow: 8px 10px 0 #0F0F25;
+    box-shadow: clamp(4px, 2vw, 8px) clamp(5px, 2.5vw, 10px) 0 #0F0F25;
     border: 2px solid #2d2d56;
-    gap: 0.75rem;
+    gap: clamp(0.5rem, 2vw, 1rem);
     transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    min-height: clamp(3rem, 10vw, 4rem);
 }
  
 .link-card:hover {
     border: 2px solid white;
+    transform: translateY(-2px);
+    box-shadow: clamp(4px, 2vw, 8px) clamp(7px, 3vw, 12px) 0 #0F0F25;
+}
+
+.link-card:active {
+    transform: translateY(0);
 }
 
 .link-icon {
-    background-image: linear-gradient(to top, purple, cyan);
-    padding: 0.5rem;
+    background-image: linear-gradient(to top, #9945ff, #00d4ff);
+    padding: clamp(0.4rem, 2vw, 0.5rem);
     border-radius: 10px;
     width: clamp(2.5rem, 8vw, 3rem);
     height: clamp(2.5rem, 8vw, 3rem);
@@ -124,61 +163,73 @@ ul.sosmed li:not(:last-child) {
     flex-shrink: 0;
 }
 
-.sosmed .link-icon {
-    background-image: linear-gradient(to top, purple, cyan);
-}
-
-.sosmed .link-icon i {
+.link-icon i {
     color: white;
     font-size: clamp(1.25rem, 4vw, 1.5rem);
 }
 
 .link-text {
     flex: 1;
-    font-size: clamp(0.875rem, 3vw, 1rem);
+    font-size: clamp(0.85rem, 3vw, 1rem);
     font-weight: 500;
+    word-break: break-word;
+    line-height: 1.3;
 }
 
 .link-action {
     color: #8787A3;
     cursor: pointer;
-    padding: clamp(0.5rem, 2vw, 0.75rem);
+    padding: clamp(0.4rem, 2vw, 0.75rem);
     flex-shrink: 0;
-    font-size: clamp(1rem, 3vw, 1.25rem);
+    font-size: clamp(0.95rem, 3vw, 1.25rem);
     transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .link-action:hover {
     color: white;
 }
 
+.link-action:active {
+    color: #00d4ff;
+}
+
 #toast {
-    width: max-content; 
+    width: 100%;
+    max-width: calc(100% - 2rem);
     position: fixed;
-    top: 0;
+    top: 1rem;
     left: 50%;
     transform: translateX(-50%);
     z-index: 999;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
 }
 
 .toast-container {
     background-color: white;
     color: #2d2d56;
-    padding: 1rem;
-    margin-top: 1rem;
+    padding: clamp(0.75rem, 2vw, 1rem);
     border-radius: 1rem;
     animation: muncul 300ms ease-in-out;  
-    font-size: clamp(0.875rem, 2vw, 1rem);
+    font-size: clamp(0.8rem, 2.5vw, 1rem);
+    font-weight: 500;
+    pointer-events: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    word-wrap: break-word;
 }
 
 .toast-gone {
-    animation: hilang 2s ease-in-out 2s;
+    animation: hilang 2s ease-in-out 2s forwards;
 }
 
 @keyframes muncul {
     from {
         opacity: 0;
-        transform: translateY(-4rem);
+        transform: translateY(-2rem);
     } 
     to {
         opacity: 1;
@@ -189,72 +240,171 @@ ul.sosmed li:not(:last-child) {
 @keyframes hilang {
     from {
         opacity: 1;
+        transform: translateY(0);
     }
-    to{
+    to {
         opacity: 0;
+        transform: translateY(-2rem);
     }
 }
 
-/* Mobile Responsive Improvements */
-@media (max-width: 480px) {
+/* Tablet devices (768px and below) */
+@media (max-width: 768px) {
     body {
         padding-top: 3rem;
         gap: 0.75rem;
     }
 
     .bg-text-animation {
-        top: 2rem;
-        opacity: 0.5;
-    }
-
-    .my-foto {
-        width: 8rem;
-        margin-top: 1rem;
+        top: 2.5rem;
+        font-size: 5rem;
+        opacity: 0.6;
     }
 
     h1 {
         margin-top: 0.5rem;
     }
 
-    p {
-        font-size: 0.9rem;
-    }
-
-    ul {
-        width: 90%;
-    }
-
     .link-card {
-        padding: 0.75rem;
-        box-shadow: 4px 5px 0 #0F0F25;
-    }
-
-    .link-icon {
-        width: 2.5rem;
-        height: 2.5rem;
-    }
-
-    .sosmed .link-icon i {
-        font-size: 1.25rem;
-    }
-
-    .link-text {
-        font-size: 0.875rem;
-    }
-
-    .link-action {
-        padding: 0.5rem;
-        font-size: 1rem;
+        min-height: 3rem;
     }
 }
 
-@media (max-width: 768px) {
+/* Mobile devices (480px and below) */
+@media (max-width: 480px) {
     body {
-        padding-top: 3rem;
+        padding-top: 2.5rem;
+        gap: 0.5rem;
     }
 
     .bg-text-animation {
-        font-size: 6rem;
-        top: 3rem;
+        top: 1.5rem;
+        font-size: 3.5rem;
+        opacity: 0.4;
+    }
+
+    .my-foto {
+        width: 7rem;
+        margin-top: 0.5rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+        margin-top: 0.5rem;
+    }
+
+    p {
+        font-size: 0.85rem;
+        padding: 0 1rem;
+    }
+
+    .sosmed {
+        gap: 0.5rem;
+        margin-top: 0.75rem;
+    }
+
+    .sosmed i {
+        font-size: 1.25rem;
+    }
+
+    ul {
+        width: 95%;
+    }
+
+    .link-card {
+        padding: 0.65rem;
+        gap: 0.5rem;
+        min-height: 2.8rem;
+        border-radius: 15px;
+    }
+
+    .link-icon {
+        width: 2.4rem;
+        height: 2.4rem;
+        padding: 0.35rem;
+    }
+
+    .link-icon i {
+        font-size: 1.1rem;
+    }
+
+    .link-text {
+        font-size: 0.8rem;
+    }
+
+    .link-action {
+        font-size: 0.95rem;
+        padding: 0.35rem;
+    }
+
+    #toast {
+        top: 0.75rem;
+        max-width: calc(100% - 1rem);
+    }
+
+    .toast-container {
+        padding: 0.65rem 0.85rem;
+        font-size: 0.75rem;
+        border-radius: 0.75rem;
+    }
+}
+
+/* Extra small devices (under 350px) */
+@media (max-width: 350px) {
+    .bg-text-animation {
+        font-size: 2.5rem;
+        top: 1rem;
+    }
+
+    h1 {
+        font-size: 1.25rem;
+    }
+
+    p {
+        font-size: 0.75rem;
+    }
+
+    .link-card {
+        padding: 0.5rem;
+        gap: 0.4rem;
+    }
+
+    .link-text {
+        font-size: 0.75rem;
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .link-card {
+        padding: clamp(0.85rem, 3vw, 1.1rem);
+    }
+
+    .link-card:active {
+        background-color: #3a3a68;
+    }
+
+    .sosmed a:active {
+        background-color: rgba(135, 135, 163, 0.2);
+    }
+}
+
+/* High DPI screens */
+@media (min-resolution: 2dppx) {
+    .link-icon {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .link-card {
+        box-shadow: clamp(4px, 2vw, 8px) clamp(5px, 2.5vw, 10px) 0 rgba(15, 15, 37, 0.8);
+    }
+}
+
+/* Safe area for notched devices */
+@supports (padding: max(0px)) {
+    body {
+        padding-left: max(1rem, env(safe-area-inset-left));
+        padding-right: max(1rem, env(safe-area-inset-right));
+        padding-bottom: max(1rem, env(safe-area-inset-bottom));
     }
 }
