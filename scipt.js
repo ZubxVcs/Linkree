@@ -2,68 +2,97 @@
  * untuk link copy
  */
 
-
 const actionLink = document.querySelectorAll(".link-card .link-action");
 
-actionLink.forEach((action) =>{
-
+actionLink.forEach((action) => {
     action.addEventListener("click", (e) => {
         e.preventDefault();
-        console.log("action : " ,action.parentElement);
-        navigator.clipboard.writeText( action.parentElement.getAttribute("href"));
+        const href = action.closest(".link-card").getAttribute("href");
+        navigator.clipboard.writeText(href);
        
         /**
          * untuk memunculkan notif
          */
-
-        document.getElementById("toast").innerHTML = `
-        <div class="toast-container">
-      <p>✅ Link berhasil disalin!</p>
-      </div>
+        const toastElement = document.getElementById("toast");
+        toastElement.innerHTML = `
+            <div class="toast-container">
+                <p>✅ Link berhasil disalin!</p>
+            </div>
         `;
 
         /**
          * untuk menghapus notif
          */
-
-        setTimeout(()  => {
-            document.querySelector("#toast .toast-container")
-            .classList.add("toast-gone")
-        }, 300)
-        setTimeout(()  => {
-            document
-                .querySelector("#toast .toast-container").remove();
-
-        }, 4000)  
+        const toastContainer = toastElement.querySelector(".toast-container");
+        
+        setTimeout(() => {
+            toastContainer.classList.add("toast-gone");
+        }, 300);
+        
+        setTimeout(() => {
+            toastContainer.remove();
+        }, 4000);
     });
-
 });
 
-
 /**
- * untuk mengganti hover
+ * untuk mengganti hover dengan touch support
  */
+const sosmedIcons = document.querySelectorAll(".sosmed i");
 
-document.querySelectorAll(".sosmed i").forEach((sosmed) =>{
-    sosmed.addEventListener("mouseenter", () => {
-        sosmed.classList.remove("ph");
-        sosmed.classList.add("ph-fill");
+sosmedIcons.forEach((icon) => {
+    // For desktop hover
+    icon.addEventListener("mouseenter", () => {
+        icon.classList.remove("ph");
+        icon.classList.add("ph-fill");
     });
 
-   sosmed.addEventListener("mouseleave", () => {
-    sosmed.classList.remove("ph-fill");
-    sosmed.classList.add("ph");
-   })
+    icon.addEventListener("mouseleave", () => {
+        icon.classList.remove("ph-fill");
+        icon.classList.add("ph");
+    });
+
+    // For touch devices
+    icon.addEventListener("touchstart", () => {
+        icon.classList.remove("ph");
+        icon.classList.add("ph-fill");
+    });
+
+    icon.addEventListener("touchend", () => {
+        icon.classList.remove("ph-fill");
+        icon.classList.add("ph");
+    });
+});
+
+/**
+ * animasi scroll untuk background text
+ * dengan performance optimization untuk mobile
+ */
+let ticking = false;
+let lastScrollY = 0;
+
+function updateAnimation() {
+    const bgText = document.querySelector(".bg-text-animation");
+    if (bgText) {
+        // Smooth animation dengan clamp untuk mencegah excessive movement
+        const scrollAmount = Math.min(lastScrollY, window.innerHeight);
+        bgText.style.transform = `translateX(-50%) translateX(${scrollAmount * 0.3}px)`;
+    }
+    ticking = false;
+}
+
+document.addEventListener("scroll", () => {
+    lastScrollY = window.scrollY;
     
-});
+    if (!ticking) {
+        window.requestAnimationFrame(updateAnimation);
+        ticking = true;
+    }
+}, { passive: true });
 
 /**
- * animasi scroll
+ * Prevent layout shift pada mobile saat loading
  */
-
-document.addEventListener("scroll",(e) => {
-
-    document.querySelector(
-        ".bg-text-animation"
-    ).style.transform=`translateX(${window.scrollY}px)`
+window.addEventListener("load", () => {
+    document.body.style.opacity = "1";
 });
