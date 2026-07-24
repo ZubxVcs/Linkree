@@ -15,13 +15,15 @@ body {
     font-family: 'Outfit', sans-serif;
     padding-top: 4rem;
     gap: 1rem;
-
+    min-height: 100vh;
 }
 
 .bg-text-animation {
-    position: absolute;
+    position: fixed;
     top: 5rem;
-    font-size: 12rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: clamp(3rem, 15vw, 12rem);
     text-transform: uppercase;
     font-weight: 900;
     -webkit-text-stroke: 2px #2d2d56;
@@ -30,14 +32,31 @@ body {
     z-index: 0;
     pointer-events: none;
     user-select: none;
+    white-space: nowrap;
 }
  
 .my-foto {
-    width: 10rem;
+    width: clamp(8rem, 25vw, 10rem);
     border-radius: 50%;
     aspect-ratio: 1/1;
     object-fit: cover;
     object-position: top;
+    position: relative;
+    z-index: 1;
+}
+
+h1 {
+    position: relative;
+    z-index: 1;
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+}
+
+p {
+    position: relative;
+    z-index: 1;
+    font-size: clamp(0.875rem, 3vw, 1rem);
+    text-align: center;
+    padding: 0 1rem;
 }
 
 a {
@@ -48,7 +67,6 @@ a {
 .sosmed i {
     font-size: 1.5rem;
     color: #8787A3;
-
 }
 
 .sosmed i:hover{
@@ -60,13 +78,13 @@ a {
 }
 
 ul {
-    width: 80%;
-    max-width: 40rem;
+    width: min(90%, 40rem);
+    position: relative;
+    z-index: 1;
 }
 
 ul li {
     list-style: none;
-
 }
 
 ul.sosmed li:not(:last-child) {
@@ -82,40 +100,65 @@ ul.sosmed li:not(:last-child) {
     justify-content: space-between;
     align-items: center;
     background-color: #2d2d56;
-    padding: 1rem;
+    padding: clamp(0.75rem, 4vw, 1rem);
     border-radius: 20px;  
     box-shadow: 8px 10px 0 #0F0F25;
     border: 2px solid #2d2d56;
+    gap: 0.75rem;
+    transition: all 0.3s ease;
 }
  
 .link-card:hover {
     border: 2px solid white;
 }
 
-.sosmed .link-icon {
+.link-icon {
     background-image: linear-gradient(to top, purple, cyan);
     padding: 0.5rem;
     border-radius: 10px;
-    aspect-ratio: 1/1;
+    width: clamp(2.5rem, 8vw, 3rem);
+    height: clamp(2.5rem, 8vw, 3rem);
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-shrink: 0;
+}
+
+.sosmed .link-icon {
+    background-image: linear-gradient(to top, purple, cyan);
 }
 
 .sosmed .link-icon i {
     color: white;
+    font-size: clamp(1.25rem, 4vw, 1.5rem);
+}
+
+.link-text {
+    flex: 1;
+    font-size: clamp(0.875rem, 3vw, 1rem);
+    font-weight: 500;
 }
 
 .link-action {
     color: #8787A3;
     cursor: pointer;
-    padding: 10px;
+    padding: clamp(0.5rem, 2vw, 0.75rem);
+    flex-shrink: 0;
+    font-size: clamp(1rem, 3vw, 1.25rem);
+    transition: color 0.3s ease;
+}
+
+.link-action:hover {
+    color: white;
 }
 
 #toast {
-   width: max-content; 
+    width: max-content; 
     position: fixed;
     top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
 }
 
 .toast-container {
@@ -125,6 +168,7 @@ ul.sosmed li:not(:last-child) {
     margin-top: 1rem;
     border-radius: 1rem;
     animation: muncul 300ms ease-in-out;  
+    font-size: clamp(0.875rem, 2vw, 1rem);
 }
 
 .toast-gone {
@@ -140,7 +184,6 @@ ul.sosmed li:not(:last-child) {
         opacity: 1;
         transform: translateY(0);
     }
-    
 }
 
 @keyframes hilang {
@@ -150,5 +193,68 @@ ul.sosmed li:not(:last-child) {
     to{
         opacity: 0;
     }
-    
+}
+
+/* Mobile Responsive Improvements */
+@media (max-width: 480px) {
+    body {
+        padding-top: 3rem;
+        gap: 0.75rem;
+    }
+
+    .bg-text-animation {
+        top: 2rem;
+        opacity: 0.5;
+    }
+
+    .my-foto {
+        width: 8rem;
+        margin-top: 1rem;
+    }
+
+    h1 {
+        margin-top: 0.5rem;
+    }
+
+    p {
+        font-size: 0.9rem;
+    }
+
+    ul {
+        width: 90%;
+    }
+
+    .link-card {
+        padding: 0.75rem;
+        box-shadow: 4px 5px 0 #0F0F25;
+    }
+
+    .link-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    .sosmed .link-icon i {
+        font-size: 1.25rem;
+    }
+
+    .link-text {
+        font-size: 0.875rem;
+    }
+
+    .link-action {
+        padding: 0.5rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding-top: 3rem;
+    }
+
+    .bg-text-animation {
+        font-size: 6rem;
+        top: 3rem;
+    }
 }
