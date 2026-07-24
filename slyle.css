@@ -27,7 +27,7 @@ body {
     font-weight: 900;
     -webkit-text-stroke: 2px #2d2d56;
     -webkit-text-fill-color: transparent;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
     z-index: 0;
     pointer-events: none;
     user-select: none;
@@ -35,6 +35,7 @@ body {
     width: 100%;
     text-align: center;
     will-change: transform;
+    letter-spacing: -0.02em;
 }
  
 .my-foto {
@@ -281,6 +282,7 @@ ul.sosmed li {
         top: 1.5rem;
         font-size: 3.5rem;
         opacity: 0.4;
+        letter-spacing: -0.03em;
     }
 
     .my-foto {
@@ -354,6 +356,7 @@ ul.sosmed li {
     .bg-text-animation {
         font-size: 2.5rem;
         top: 1rem;
+        letter-spacing: -0.04em;
     }
 
     h1 {
